@@ -1,0 +1,19 @@
+{
+  "name": "bot-sample-haruguchi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://haruguchi@bot-sample-haruguchi.scm.azurewebsites.net:443/bot-sample-haruguchi.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "botbuilder": "^3.9.1",
+    "restify": "^5.2.0"
+  }
+}
