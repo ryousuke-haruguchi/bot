@@ -2,94 +2,94 @@ var restify = require('restify');
 var builder = require('botbuilder');
 
 //=========================================================
-// ƒ{ƒbƒg‚Ì€”õ
+// ãƒœãƒƒãƒˆã®æº–å‚™
 //=========================================================
 
-// RestifyƒT[ƒo‚Ìİ’è
+// Restifyã‚µãƒ¼ãƒã®è¨­å®š
 var server = restify.createServer();
 server.listen(process.env.port || process.env.PORT || 3978, function ()
 {
   console.log('%s listening to %s', server.name, server.url);
 });
 
-// ƒ{ƒbƒg‚ÌÚ‘±æİ’è
+// ãƒœãƒƒãƒˆã®æ¥ç¶šå…ˆè¨­å®š
 var connector = new builder.ChatConnector(
 {
-  // MicrosoftBotFrameworkŒö®ƒTƒCƒg‚Åæ“¾‚µ‚½AID‚ÆƒpƒXƒ[ƒh‚ğ“ü—Í‚µ‚Ü‚·
-  appId: 'a2d367fc-d359-427a-b592-c7c20321c9d4',
-  appPassword: 'KYAxweHwuSUp3nLftUgK2D3'
+  // MicrosoftBotFrameworkå…¬å¼ã‚µã‚¤ãƒˆã§å–å¾—ã—ãŸã€IDã¨ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã‚’å…¥åŠ›ã—ã¾ã™
+  appId: '*********',
+  appPassword: '*********'
 });
 
-// ƒ{ƒbƒg‚Ìd‘g‚İ‚ğ’ñ‹Ÿ‚µ‚Ä‚­‚ê‚éUniversalBotƒIƒuƒWƒFƒNƒg‚ğì¬
+// ãƒœãƒƒãƒˆã®ä»•çµ„ã¿ã‚’æä¾›ã—ã¦ãã‚Œã‚‹UniversalBotã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ä½œæˆ
 var bot = new builder.UniversalBot(connector, 
 {
-  // ƒGƒ‰[ƒƒbƒZ[ƒW‚Ì‰Šúİ’è‚ğ•ÏX
-  dialogErrorMessage: "‚·‚İ‚Ü‚¹‚ñB—\•ñ‚ğŠ“¾‚Å‚«‚È‚¢êŠ‚©AŠwK•s‘«‚Å”F¯‚Å‚«‚Ü‚¹‚ñB(T_T)"
+  // ã‚¨ãƒ©ãƒ¼ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®åˆæœŸè¨­å®šã‚’å¤‰æ›´
+  dialogErrorMessage: "ã™ã¿ã¾ã›ã‚“ã€‚äºˆå ±ã‚’æ‰€å¾—ã§ããªã„å ´æ‰€ã‹ã€å­¦ç¿’ä¸è¶³ã§èªè­˜ã§ãã¾ã›ã‚“ã€‚(T_T)"
 });
 
-// ***/api/messages‚ğƒGƒ“ƒhƒ|ƒCƒ“ƒg‚Æ‚µ‚ÄAƒ{ƒbƒg‚ğƒT[ƒo‚Å’ñ‹Ÿ‚·‚é
+// ***/api/messagesã‚’ã‚¨ãƒ³ãƒ‰ãƒã‚¤ãƒ³ãƒˆã¨ã—ã¦ã€ãƒœãƒƒãƒˆã‚’ã‚µãƒ¼ãƒã§æä¾›ã™ã‚‹
 server.post('/api/messages', connector.listen());
 
 
 
 //=========================================================
-// IntentDialogƒIƒuƒWƒFƒNƒg‚Ì—pˆÓ
+// IntentDialogã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ç”¨æ„
 //=========================================================
 
-// ”F¯‚Éw’è‚·‚éLUIS API‚ÌƒAƒhƒŒƒX‚ğw’è
-var recognizer = new builder.LuisRecognizer('https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/54a899fd-f1be-4710-9f11-6cfb069d1e18?subscription-key=88fe6a6813d3413c9137ad1df9f96da7&timezoneOffset=0&verbose=true&q=');
+// èªè­˜ã«æŒ‡å®šã™ã‚‹LUIS APIã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’æŒ‡å®š
+var recognizer = new builder.LuisRecognizer('URL');
 
-// IntentDialogƒIƒuƒWƒFƒNƒg‚ğì¬
+// IntentDialogã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ä½œæˆ
 var intents = new builder.IntentDialog({recognizers: [recognizer]});
 
 //=========================================================
-// ‰ï˜b‚Ìˆ—
+// ä¼šè©±ã®å‡¦ç†
 //=========================================================
 
-// ‰Šúƒ_ƒCƒAƒƒO‚ğAintentDialog‚Æ‚µ‚Äg—p‚·‚é
+// åˆæœŸãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’ã€intentDialogã¨ã—ã¦ä½¿ç”¨ã™ã‚‹
 bot.dialog('/', intents);
 
-// ƒCƒ“ƒeƒ“ƒg‚Æˆ—‚ÌŒ‹‚Ñ‚Â‚¯
-intents.matches('ˆ¥A‚µ‚½‚¢', function (session, args)
+// ã‚¤ãƒ³ãƒ†ãƒ³ãƒˆã¨å‡¦ç†ã®çµã³ã¤ã‘
+intents.matches('æŒ¨æ‹¶ã—ãŸã„', function (session, args)
 {
 	//=======================================================
-	// ƒCƒ“ƒeƒ“ƒg‚ªuAskWeatherv‚Æ”F¯‚³‚ê‚½‚Ìˆ—
+	// ã‚¤ãƒ³ãƒ†ãƒ³ãƒˆãŒã€ŒAskWeatherã€ã¨èªè­˜ã•ã‚ŒãŸæ™‚ã®å‡¦ç†
 	//=======================================================
 	
-	// EntityRecognizer‚ğg—p‚µ‚ÄAƒGƒ“ƒeƒBƒeƒB‚Ì“à—e‚ğ’Šo‚·‚éB
-	var name     = builder.EntityRecognizer.findEntity(args.entities, '–¼‘O');
-	var greeting = builder.EntityRecognizer.findEntity(args.entities, 'ˆ¥A');
+	// EntityRecognizerã‚’ä½¿ç”¨ã—ã¦ã€ã‚¨ãƒ³ãƒ†ã‚£ãƒ†ã‚£ã®å†…å®¹ã‚’æŠ½å‡ºã™ã‚‹ã€‚
+	var name     = builder.EntityRecognizer.findEntity(args.entities, 'åå‰');
+	var greeting = builder.EntityRecognizer.findEntity(args.entities, 'æŒ¨æ‹¶');
 	
-	// ‰ñ“šƒeƒLƒXƒg‚ğ•ÛŠÇ‚·‚é•Ï”—pˆÓ
+	// å›ç­”ãƒ†ã‚­ã‚¹ãƒˆã‚’ä¿ç®¡ã™ã‚‹å¤‰æ•°ç”¨æ„
 	resultText = ""
 	
-	// ˆ¥A‚Ì“à—e‚ğ•ÛŠÇ
-	greetingWord = greeting ? greeting.entity : "‚±‚ñ‚É‚¿‚Í";
+	// æŒ¨æ‹¶ã®å†…å®¹ã‚’ä¿ç®¡
+	greetingWord = greeting ? greeting.entity : "ã“ã‚“ã«ã¡ã¯";
 	if(name)
 	{
-		// Îˆä‚Ìê‡‚Í‚¿‚á‚ñ‚Æ”n­‚É‚·‚éB‚Ù‚©‚Ìl‚Ìê‡‚Í•’Ê‚Éˆ¥A‚·‚é
-		if(name.entity == "Îˆä")
+		// çŸ³äº•ã®å ´åˆã¯ã¡ã‚ƒã‚“ã¨é¦¬é¹¿ã«ã™ã‚‹ã€‚ã»ã‹ã®äººã®å ´åˆã¯æ™®é€šã«æŒ¨æ‹¶ã™ã‚‹
+		if(name.entity == "çŸ³äº•")
 		{
-			resultText += "Îˆä‚¿‚á‚ñ‚Íˆ¥A‚à‚¿‚á‚ñ‚Æo—ˆ‚È‚¢‚Ì‚©‚¢H"
+			resultText += "çŸ³äº•ã¡ã‚ƒã‚“ã¯æŒ¨æ‹¶ã‚‚ã¡ã‚ƒã‚“ã¨å‡ºæ¥ãªã„ã®ã‹ã„ï¼Ÿ"
 		}
 		else
 		{
-			resultText += name.entity + "‚³‚ñA" + greetingWord;
+			resultText += name.entity + "ã•ã‚“ã€" + greetingWord;
 		}
-		// Œ‹‰ÊƒeƒLƒXƒg‚ğ”­Œ¾ + ‰ï˜b‚ÌI—¹
+		// çµæœãƒ†ã‚­ã‚¹ãƒˆã‚’ç™ºè¨€ + ä¼šè©±ã®çµ‚äº†
 		session.send(resultText);
 	}
 	else
 	{
-		session.send("‚æ[‚í‚©‚ç‚ñˆ¥A‚·‚ñ‚¶‚á‚Ë‚¦IIII");
+		session.send("ã‚ˆãƒ¼ã‚ã‹ã‚‰ã‚“æŒ¨æ‹¶ã™ã‚“ã˜ã‚ƒã­ãˆï¼ï¼ï¼ï¼");
 	}
 }).onDefault(function()
 {
 
     // =======================================================
-    // “–‚Ä‚Í‚Ü‚éƒCƒ“ƒeƒ“ƒg‚ª‚È‚©‚Á‚½‚Ì‚Æ‚«(None) ‚Ìˆ—
+    // å½“ã¦ã¯ã¾ã‚‹ã‚¤ãƒ³ãƒ†ãƒ³ãƒˆãŒãªã‹ã£ãŸã®ã¨ã(None) ã®å‡¦ç†
     // =======================================================
 
-    session.send("‚í‚©‚ç‚ñI‚¨‚Ü‚¦‚ªŒ¾‚Á‚Ä‚¢‚é‚±‚Æ‚Í‚í‚©‚ç‚ñI");
+    session.send("ã‚ã‹ã‚‰ã‚“ï¼ãŠã¾ãˆãŒè¨€ã£ã¦ã„ã‚‹ã“ã¨ã¯ã‚ã‹ã‚‰ã‚“ï¼");
 
 });
